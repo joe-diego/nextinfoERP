@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
 from django.core.urlresolvers import reverse_lazy
 from .models import Band, Member
-from .forms import BandContactForm
+from .forms import BandContactForm, BandForm, MemberForm
 
 def home(request):
     return render(request, 'home.html')
@@ -41,3 +41,14 @@ def protected_view(request):
 def message(request):
     """ Message if is not authenticated. Simple view! """
     return HttpResponse('Access denied!')
+
+class BandForm(CreateView):
+    template_name = 'bands/band_form.html'
+    form_class = BandForm
+    success_url = reverse_lazy('bands')
+
+
+class MemberForm(CreateView):
+    template_name = 'bands/member_form.html'
+    form_class = MemberForm
+    success_url = reverse_lazy('bands')

@@ -12,9 +12,11 @@ class BandForm(forms.ModelForm):
 
     class Meta:
         model = Band
+        fields = '__all__' # Django>=1.8
 
 
 class MemberForm(forms.ModelForm):
 
     class Meta:
         model = Member
+        fields = '__all__'
