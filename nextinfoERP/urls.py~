@@ -4,6 +4,8 @@ from nextinfoERP.bands.views import *
 from django.contrib import admin
 
 urlpatterns = patterns('nextinfoERP.bands.views',
+
+
     url(r'^$', 'home', name='home'),
     url(r'^bands/$', 'band_listing', name='bands'),
     url(r'^bands/(?P<pk>\d+)/$', 'band_detail', name='band_detail'),
@@ -12,6 +14,6 @@ urlpatterns = patterns('nextinfoERP.bands.views',
     url(r'^contact/$', 'band_contact', name='contact'),
     url(r'^protected/$', 'protected_view', name='protected'),
     url(r'^accounts/login/$', 'message'),
-
     url(r'^admin/', include(admin.site.urls), name='admin'),
+
 )
