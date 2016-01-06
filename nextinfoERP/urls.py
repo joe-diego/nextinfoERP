@@ -1,21 +1,16 @@
-"""nextinfoERP URL Configuration
+from django.conf.urls import patterns, include, url
+from nextinfoERP.bands.views import *
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.9/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
-from django.conf.urls import url
 from django.contrib import admin
 
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-]
+urlpatterns = patterns('nextinfoERP.bands.views',
+    url(r'^$', 'home', name='home'),
+    url(r'^bands/$', 'band_listing', name='bands'),
+    url(r'^bands/(?P<pk>\d+)/$', 'band_detail', name='band_detail'),
+    url(r'^bandform/$', BandForm.as_view(), name='band_form'),
+    url(r'^memberform/$', MemberForm.as_view(), name='member_form'),
+    url(r'^contact/$', 'band_contact', name='contact'),
+    url(r'^protected/$', 'protected_view', name='protected'),
+    url(r'^accounts/login/$', 'message'),
+    url(r'^admin/', include(admin.site.urls), name='admin'),
+)
