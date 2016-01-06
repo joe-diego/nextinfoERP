@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView, ListView
 from django.core.urlresolvers import reverse_lazy
 from .models import Band, Member
 from .forms import BandContactForm, BandForm, MemberForm
 
 def home(request):
     return render(request, 'home.html')
+
+class Home(TemplateView):
+    template_name = 'home.html'
 
 def band_listing(request):
     """ A view of all bands. """
@@ -16,6 +19,12 @@ def band_listing(request):
     if var_get_search is not None:
         bands = bands.filter(name__icontains=var_get_search)
     return render(request, 'bands/band_listing.html', {'bands': bands})
+
+class BandList(ListView):
+    template_name = 'bands/band_listing.html'
+    model = Band
+    context_object_name = 'bands'
+    paginate_by = 5
 
 def band_contact(request):
     """ A example of form """
